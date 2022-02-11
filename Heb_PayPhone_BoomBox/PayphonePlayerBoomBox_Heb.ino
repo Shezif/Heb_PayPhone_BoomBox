@@ -35,8 +35,8 @@
 #include <LCD_1602_HEB.h>   
 
 //////////////////////////////////////  Values for you to tweak are :   
-byte SpkrVol = 15;                  //  Default external speaker Volume ( 0 to 30 ) 
-byte PhonVol = 15;                  //  Default Phone handset Volume    ( 0 to 30 ) 
+byte SpkrVol = 50*30/100;                  //  Default external speaker Volume ( 0 to 30 ) 
+byte PhonVol = 50*30/100;                  //  Default Phone handset Volume    ( 0 to 30 ) 
 unsigned short CloseEnough=300;     //  Detection distance (0 to 2000 mm)
 byte DistAvg=3;                     //  number of distance readings to average
 //////////////////////////////////////
@@ -84,7 +84,7 @@ void loop()                   /////////// Main Program : ////////////////
       delay (500);                                               //                                   //
       SpkrSwap(); if(!SpkrMode) SpkrSwap();                      // Change back to speaker output     //
       delay(2000);   myMP3.pause();  delay(300);                 // Delay and stop message if active  // 
-      lcd.noBacklight();                                         //                                   //
+      lcd.noBacklight();       RingRing=false;                   //                                   //
     }                                                                                                 //
     Mode=1;                                                                                           // 
     RandMode=false; RandTmp=false; Greeted=false;                                                     //
@@ -127,7 +127,7 @@ void loop()                   /////////// Main Program : ////////////////
                                                                                                       //
       if(!Greeted) {                                           //// First entry to play mode :        //
         myMP3.pause(); delay(200);                             // Stop playing                        //
-        if(SpkrMode) SpkrSwap();                               //Switch to Headset                    //
+        if(SpkrMode) SpkrSwap();                               // Switch to Headset                    //
         Greeted=true;                                          // run only once per session           //
         NN=1;                                                  // reset selection number              //
         ComboKeys[0]='#'; ComboKeys[1]='#'; ComboKeys[2]='#';  //                                     //
